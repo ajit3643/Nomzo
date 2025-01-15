@@ -1,8 +1,11 @@
 import "./style.css";
 import LOGO from "../../assets/Nomzo.png";
 import CART from "../../assets/carts.png";
+import { useState } from "react";
 // Header Component
 const Header = () => {
+  const [btnName, setBtnName] = useState("Login");
+
   return (
     <div className="header">
       <div className="logo-container">
@@ -22,6 +25,14 @@ const Header = () => {
           <li>
             <a href="#contact">Contact</a>
           </li>
+          <button
+            className="button"
+            onClick={() => {
+              btnName === "Login" ? setBtnName("Logout") : setBtnName("Login");
+            }}
+          >
+            {btnName}
+          </button>
         </ul>
       </div>
       <div className="cart">

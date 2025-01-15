@@ -30,6 +30,34 @@
 .search-container button:hover {
   background-color: #0056b3;
 }
+
+/* Filter Buttons */
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 20px;
+}
+
+.filter-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.filter-btn:hover {
+  background-color: #218838;
+}
+
+.filter-btn:active {
+  background-color: #1e7e34;
+}
+
 /* General Styles for Restaurant Cards */
 .restaurant {
   background-color: #fff;
@@ -96,6 +124,64 @@
   grid-template-columns: repeat(4, 1fr); /* Default: 4 cards per row */
   gap: 1.5rem;
   width: 100%;
+}
+
+/* Shimmer UI CSS */
+
+/* Container for shimmer cards */
+.shimmer-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Individual shimmer card */
+.shimmer-card {
+  width: 100%;
+  max-width: 300px;
+  height: 180px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  border-radius: 8px;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Shimmer animation */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .shimmer-container {
+    gap: 12px;
+    padding: 10px;
+  }
+
+  .shimmer-card {
+    max-width: 100%;
+    height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .shimmer-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .shimmer-card {
+    width: 90%;
+    height: 120px;
+  }
 }
 
 /* Responsive Design */
