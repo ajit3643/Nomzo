@@ -1,5 +1,5 @@
 import { CDN_URL } from "../../utils/constants";
-import "./style.css";
+
 const Restaurant = (props) => {
   const { resData } = props;
   const { cloudinaryImageId, name, cuisines, avgRating, costForTwo, sla } =

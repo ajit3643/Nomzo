@@ -1,4 +1,3 @@
-import "./style.css";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
@@ -19,40 +18,69 @@ const Header = () => {
   const [btnName, setBtnName] = useState("Login");
 
   return (
-    <div className="header">
-      <div className="logo-container">
-        <img className="logo" src={LOGO} />
-      </div>
-      <div className="nav-items">
-        <ul>
-          <li>
-            <a href="#home">Home</a>
-          </li>
-          <li>
-            <a href="#menu">Menu</a>
-          </li>
-          <li>
-            <a href="#about">About</a>
-          </li>
-          <li>
-            <a href="#contact">Contact</a>
-          </li>
+    <div className="bg-white shadow-lg">
+      {/* Header Container */}
+      <div className="container mx-auto flex justify-between items-center py-4 px-6">
+        {/* Logo */}
+        <div className="flex items-center space-x-2">
+          <img className="w-12 h-12" src={LOGO} alt="Logo" />
+        </div>
+
+        {/* Navigation Links */}
+        <nav className="flex items-center space-x-6">
+          <ul className="flex space-x-4">
+            <li>
+              <a
+                href="#home"
+                className="text-gray-700 hover:text-green-600 font-medium"
+              >
+                Home
+              </a>
+            </li>
+            <li>
+              <a
+                href="#menu"
+                className="text-gray-700 hover:text-green-600 font-medium"
+              >
+                Menu
+              </a>
+            </li>
+            <li>
+              <a
+                href="#about"
+                className="text-gray-700 hover:text-green-600 font-medium"
+              >
+                About
+              </a>
+            </li>
+            <li>
+              <a
+                href="#contact"
+                className="text-gray-700 hover:text-green-600 font-medium"
+              >
+                Contact
+              </a>
+            </li>
+          </ul>
+
+          {/* Login/Logout Button */}
           <Button
             variant="contained"
-            color="success"
-            onClick={() => {
-              btnName === "Login" ? setBtnName("Logout") : setBtnName("Login");
-            }}
+            color={btnName === "Login" ? "success" : "error"}
+            onClick={() => setBtnName(btnName === "Login" ? "Logout" : "Login")}
           >
             {btnName}
           </Button>
-        </ul>
-      </div>
-      <div className="cart">
-        <IconButton>
-          <ShoppingCartIcon fontSize="small" />
-          <CartBadge badgeContent={2} color="primary" overlap="circular" />
-        </IconButton>
+        </nav>
+
+        {/* Cart Icon */}
+        <div className="flex items-center">
+          <IconButton>
+            <Badge badgeContent={2} color="primary" overlap="circular">
+              <ShoppingCartIcon fontSize="medium" />
+            </Badge>
+          </IconButton>
+        </div>
       </div>
     </div>
   );

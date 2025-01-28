@@ -3,7 +3,7 @@ import Shimmer from "./Shimmer";
 
 import { useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import "./style.css";
+
 
 const Body = () => {
   // State variables
