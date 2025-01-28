@@ -1,24 +1,20 @@
 import Restaurant from "./Restaurant";
 import Shimmer from "./Shimmer";
-
 import { useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-
 const Body = () => {
-  // State variables
   const [listOfRestaurant, setResList] = useState([]);
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [page, setPage] = useState(1); // Current page number
   const [hasMore, setHasMore] = useState(true); // Whether more data is available
 
-  // Use Effect to fetch the first batch of data
+  // Fetch data when the component mounts or page changes
   useEffect(() => {
     fetchData();
   }, [page]);
 
-  // Function to fetch restaurant data
   const fetchData = async () => {
     try {
       const data = await fetch(
@@ -35,14 +31,13 @@ const Body = () => {
         return;
       }
 
-      setResList((prev) => [...prev, ...restaurants]); // Append new restaurants to the existing list
+      setResList((prev) => [...prev, ...restaurants]); // Append to existing list
       setFilteredRestaurant((prev) => [...prev, ...restaurants]); // Update filtered list
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
-  // Filter search function
   const handleSearch = () => {
     const filtered = listOfRestaurant.filter((res) =>
       res.info.name.toLowerCase().includes(searchText.toLowerCase())
@@ -53,23 +48,31 @@ const Body = () => {
   return listOfRestaurant.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className="body">
-      {/* Filter Section */}
-      <div className="filter">
-        <div className="search-container">
+    <div className="bg-gray-100 min-h-screen">
+      {/* Search Section */}
+      <div className="bg-blue-500 text-white p-6 shadow-md">
+        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center gap-4">
           <input
             type="text"
+            className="w-full sm:w-3/4 border border-blue-300 rounded-lg p-3 text-black focus:outline-none focus:ring-2 focus:ring-blue-700"
             placeholder="Search for restaurant"
             value={searchText}
-            onChange={(event) => setSearchText(event.target.value)}
+            onChange={(e) => setSearchText(e.target.value)}
           />
-          <button className="search-button" onClick={handleSearch}>
-            Search
+          <button
+            className="w-full sm:w-1/4 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 rounded-lg transition-all"
+            onClick={handleSearch}
+          >
+            🔍 Search
           </button>
         </div>
-        <div className="filter-buttons">
+      </div>
+
+      {/* Filter Section */}
+      <div className="bg-white p-6 mt-4 shadow-md">
+        <div className="max-w-5xl mx-auto flex justify-center">
           <button
-            className="filter-btn"
+            className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition-all"
             onClick={() => {
               const filteredRestList = listOfRestaurant.filter(
                 (res) => res.info.avgRating > 4
@@ -77,28 +80,29 @@ const Body = () => {
               setFilteredRestaurant(filteredRestList);
             }}
           >
-            Top Rated Restaurants
+            🌟 Top Rated Restaurants
           </button>
         </div>
       </div>
 
       {/* Infinite Scroll for Restaurant List */}
       <InfiniteScroll
-        dataLength={filteredRestaurant.length} // Total items rendered so far
-        next={() => setPage((prev) => prev + 1)} // Fetch next page
-        hasMore={hasMore} // Check if more data is available
+        dataLength={filteredRestaurant.length}
+        next={() => setPage((prev) => prev + 1)}
+        hasMore={hasMore}
         loader={
-          <div style={{ textAlign: "center", margin: "20px 0" }}>
+          <div className="text-center my-4">
             <Shimmer />
           </div>
         }
         endMessage={
-          <p style={{ textAlign: "center", margin: "20px 0" }}>
-            <b>Yay! You've seen it all!</b>
+          <p className="text-center my-4 font-semibold">
+            Yay! You've seen it all!
           </p>
         }
       >
-        <div className="restaurant-container">
+        {/* Restaurant Grid */}
+        <div className="max-w-7xl mx-auto py-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {filteredRestaurant.map((restaurant) => (
             <Restaurant key={restaurant.info.id} resData={restaurant} />
           ))}
