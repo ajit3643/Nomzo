@@ -18,7 +18,7 @@ const Body = () => {
   const fetchData = async () => {
     try {
       const data = await fetch(
-        `https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.4746598&lng=77.12934249999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING&page=${page}`
+        `https://raw.githubusercontent.com/namastedev/namaste-react/refs/heads/main/swiggy-api`
       );
       const json = await data.json();
 

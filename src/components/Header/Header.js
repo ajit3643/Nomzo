@@ -5,6 +5,7 @@ import Badge, { badgeClasses } from "@mui/material/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCartOutlined";
 import LOGO from "../../assets/Nomzo.png";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const CartBadge = styled(Badge)`
   & .${badgeClasses.badge} {
@@ -23,43 +24,37 @@ const Header = () => {
       <div className="container mx-auto flex justify-between items-center py-4 px-6">
         {/* Logo */}
         <div className="flex items-center space-x-2">
-          <img className="w-12 h-12" src={LOGO} alt="Logo" />
+          <Link to="/">
+            <img className="w-12 h-12" src={LOGO} alt="Logo" />
+          </Link>
         </div>
 
         {/* Navigation Links */}
         <nav className="flex items-center space-x-6">
           <ul className="flex space-x-4">
             <li>
-              <a
-                href="#home"
+              <Link
+                to="/"
                 className="text-gray-700 hover:text-green-600 font-medium"
               >
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#menu"
-                className="text-gray-700 hover:text-green-600 font-medium"
-              >
-                Menu
-              </a>
-            </li>
-            <li>
-              <a
-                href="#about"
+              <Link
+                to="/about"
                 className="text-gray-700 hover:text-green-600 font-medium"
               >
                 About
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#contact"
+              <Link
+                to="/contact"
                 className="text-gray-700 hover:text-green-600 font-medium"
               >
                 Contact
-              </a>
+              </Link>
             </li>
           </ul>
 
